@@ -18,4 +18,13 @@ public class DateAdapterTest {
         Date getBack = gson.fromJson(s, Date.class);
         assertEquals(date.getTime() / 1000, getBack.getTime() / 1000);
     }
+
+    @Test
+    public void testCompatible() {
+        Gson oldGson = new Gson();
+        Gson gson = JavaTimeConverters.registerDate(new GsonBuilder()).create();
+        Date date = new Date(2023 - 1900, Calendar.NOVEMBER, 16, 22, 13, 15);
+        Date getBack = gson.fromJson(oldGson.toJson(date), Date.class);
+        assertEquals(date.getTime() / 1000, getBack.getTime() / 1000);
+    }
 }

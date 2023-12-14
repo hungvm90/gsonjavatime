@@ -4,25 +4,23 @@ import com.fatboyindustrial.gsonjavatime.Converters;
 import com.google.gson.GsonBuilder;
 
 import java.time.Duration;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Date;
 
 public class JavaTimeConverters {
     public static GsonBuilder registerAll(GsonBuilder builder) {
-        if (builder == null) {
-            throw new NullPointerException("builder cannot be null");
-        } else {
-            builder.registerTypeAdapter(Date.class, new DateAdapter());
-            builder.registerTypeAdapter(Converters.LOCAL_DATE_TYPE, new LocalDateAdapter());
-            builder.registerTypeAdapter(Converters.LOCAL_DATE_TIME_TYPE, new LocalDateTimeAdapter());
-            builder.registerTypeAdapter(Converters.LOCAL_TIME_TYPE, new LocalTimeAdapter());
-            builder.registerTypeAdapter(Converters.OFFSET_DATE_TIME_TYPE, new OffsetDateTimeAdapter());
-            builder.registerTypeAdapter(Converters.ZONED_DATE_TIME_TYPE, new ZonedDateTimeAdapter());
-            builder.registerTypeAdapter(Converters.INSTANT_TYPE, new InstantAdapter());
-            builder.registerTypeAdapter(Converters.ZONE_ID_TYPE, new ZoneIdAdapter());
-            builder.registerTypeAdapter(Converters.OFFSET_TIME_TYPE, new OffsetTimeAdapter());
-            builder.registerTypeAdapter(Duration.class, new DurationAdapter());
-            return builder;
-        }
+        registerDate(builder);
+        registerLocalDate(builder);
+        registerLocalDateTime(builder);
+        registerLocalTime(builder);
+        registerOffsetDateTime(builder);
+        registerZonedDateTime(builder);
+        registerInstant(builder);
+        registerZoneId(builder);
+        registerOffsetTime(builder);
+        registerDuration(builder);
+        return builder;
     }
 
     public static GsonBuilder registerDate(GsonBuilder builder) {
@@ -92,7 +90,7 @@ public class JavaTimeConverters {
         if (builder == null) {
             throw new NullPointerException("builder cannot be null");
         } else {
-            builder.registerTypeAdapter(Converters.ZONE_ID_TYPE, new ZoneIdAdapter());
+            builder.registerTypeHierarchyAdapter(ZoneId.class, new ZoneIdAdapter());
             return builder;
         }
     }
