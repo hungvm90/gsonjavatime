@@ -1,11 +1,10 @@
-package io.hungvm;
+package io.github.hungvm90.gsonjavatime;
 
 import com.fatboyindustrial.gsonjavatime.Converters;
 import com.google.gson.GsonBuilder;
 
 import java.time.Duration;
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.util.Date;
 
 public class JavaTimeConverters {

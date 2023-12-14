@@ -1,21 +1,22 @@
-package io.hungvm;
+package io.github.hungvm90.gsonjavatime;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.Test;
 
-import java.time.*;
+import java.time.LocalDate;
+import java.time.Month;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-public class OffsetTimeAdapterTest {
+public class LocalDateAdapterTest {
     @Test
     public void testSerialisation() {
         Gson gson = JavaTimeConverters.registerAll(new GsonBuilder()).create();
-        var t = OffsetTime.of(LocalTime.of(13, 30, 21, 1230000), ZoneOffset.ofHours(1));
+        var t = LocalDate.of(2023, Month.DECEMBER, 14);
         String s = gson.toJson(t);
-        assertEquals("\"13:30:21.00123+01:00\"", s);
-        var getBack = gson.fromJson(s, OffsetTime.class);
+        assertEquals("\"2023-12-14\"", s);
+        var getBack = gson.fromJson(s, LocalDate.class);
         assertEquals(t, getBack);
     }
 
@@ -23,8 +24,8 @@ public class OffsetTimeAdapterTest {
     public void testCompatible() {
         Gson oldGson = new Gson();
         Gson gson = JavaTimeConverters.registerAll(new GsonBuilder()).create();
-        var t = OffsetTime.now();
-        var getBack = gson.fromJson(oldGson.toJson(t), OffsetTime.class);
+        var t = LocalDate.of(2023, Month.DECEMBER, 14);
+        var getBack = gson.fromJson(oldGson.toJson(t), LocalDate.class);
         assertEquals(t, getBack);
     }
 }

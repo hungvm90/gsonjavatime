@@ -1,4 +1,4 @@
-package io.hungvm;
+package io.github.hungvm90.gsonjavatime;
 
 import com.fatboyindustrial.gsonjavatime.LocalDateTimeConverter;
 import com.google.gson.*;

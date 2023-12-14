@@ -1,4 +1,4 @@
-package io.hungvm;
+package io.github.hungvm90.gsonjavatime;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
