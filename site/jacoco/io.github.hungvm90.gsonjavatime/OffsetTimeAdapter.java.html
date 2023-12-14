@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OffsetTimeAdapter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gson-javatime-serialisers</a> &gt; <a href="index.source.html" class="el_package">io.github.hungvm90.gsonjavatime</a> &gt; <span class="el_source">OffsetTimeAdapter.java</span></div><h1>OffsetTimeAdapter.java</h1><pre class="source lang-java linenums">package io.github.hungvm90.gsonjavatime;
+
+import com.fatboyindustrial.gsonjavatime.OffsetTimeConverter;
+import com.google.gson.*;
+
+import java.lang.reflect.Type;
+import java.time.LocalTime;
+import java.time.OffsetTime;
+import java.time.ZoneOffset;
+
+<span class="fc" id="L11">public class OffsetTimeAdapter implements JsonSerializer&lt;OffsetTime&gt;, JsonDeserializer&lt;OffsetTime&gt; {</span>
+
+<span class="fc" id="L13">    private final OffsetTimeConverter converter = new OffsetTimeConverter();</span>
+
+    @Override
+    public OffsetTime deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+        try {
+<span class="fc" id="L18">            return converter.deserialize(jsonElement, type, jsonDeserializationContext);</span>
+<span class="fc" id="L19">        } catch (UnsupportedOperationException e) {</span>
+<span class="fc" id="L20">            JsonObject dateTime = jsonElement.getAsJsonObject();</span>
+<span class="fc" id="L21">            JsonObject time = dateTime.getAsJsonObject(&quot;time&quot;);</span>
+<span class="fc" id="L22">            JsonObject offset = dateTime.getAsJsonObject(&quot;offset&quot;);</span>
+<span class="fc" id="L23">            LocalTime localTime = LocalTime.of(time.get(&quot;hour&quot;).getAsInt(), time.get(&quot;minute&quot;).getAsInt(), time.get(&quot;second&quot;).getAsInt(), time.get(&quot;nano&quot;).getAsInt());</span>
+<span class="fc" id="L24">            ZoneOffset zoneOffset = ZoneOffset.ofTotalSeconds(offset.get(&quot;totalSeconds&quot;).getAsInt());</span>
+<span class="fc" id="L25">            return OffsetTime.of(localTime, zoneOffset);</span>
+        }
+    }
+
+    @Override
+    public JsonElement serialize(OffsetTime offsetDateTime, Type type, JsonSerializationContext jsonSerializationContext) {
+<span class="fc" id="L31">        return converter.serialize(offsetDateTime, type, jsonSerializationContext);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

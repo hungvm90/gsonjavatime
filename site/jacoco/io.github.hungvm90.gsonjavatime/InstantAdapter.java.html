@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InstantAdapter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gson-javatime-serialisers</a> &gt; <a href="index.source.html" class="el_package">io.github.hungvm90.gsonjavatime</a> &gt; <span class="el_source">InstantAdapter.java</span></div><h1>InstantAdapter.java</h1><pre class="source lang-java linenums">package io.github.hungvm90.gsonjavatime;
+
+import com.fatboyindustrial.gsonjavatime.InstantConverter;
+import com.google.gson.*;
+
+import java.lang.reflect.Type;
+import java.time.Instant;
+
+<span class="fc" id="L9">public class InstantAdapter implements JsonSerializer&lt;Instant&gt;, JsonDeserializer&lt;Instant&gt; {</span>
+
+<span class="fc" id="L11">    private final InstantConverter converter = new InstantConverter();</span>
+
+    @Override
+    public Instant deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+        try {
+<span class="fc" id="L16">            return converter.deserialize(jsonElement, type, jsonDeserializationContext);</span>
+<span class="fc" id="L17">        } catch (UnsupportedOperationException e) {</span>
+<span class="fc" id="L18">            long seconds = jsonElement.getAsJsonObject().get(&quot;seconds&quot;).getAsLong();</span>
+<span class="fc" id="L19">            long nanos = jsonElement.getAsJsonObject().get(&quot;nanos&quot;).getAsLong();</span>
+<span class="fc" id="L20">            return Instant.ofEpochSecond(seconds, nanos);</span>
+        }
+    }
+
+    @Override
+    public JsonElement serialize(Instant offsetDateTime, Type type, JsonSerializationContext jsonSerializationContext) {
+<span class="fc" id="L26">        return converter.serialize(offsetDateTime, type, jsonSerializationContext);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

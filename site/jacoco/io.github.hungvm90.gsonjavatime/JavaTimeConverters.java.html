@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JavaTimeConverters.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">gson-javatime-serialisers</a> &gt; <a href="index.source.html" class="el_package">io.github.hungvm90.gsonjavatime</a> &gt; <span class="el_source">JavaTimeConverters.java</span></div><h1>JavaTimeConverters.java</h1><pre class="source lang-java linenums">package io.github.hungvm90.gsonjavatime;
+
+import com.fatboyindustrial.gsonjavatime.Converters;
+import com.google.gson.GsonBuilder;
+
+import java.time.Duration;
+import java.time.ZoneId;
+import java.util.Date;
+
+<span class="nc" id="L10">public class JavaTimeConverters {</span>
+    public static GsonBuilder registerAll(GsonBuilder builder) {
+<span class="fc" id="L12">        registerDate(builder);</span>
+<span class="fc" id="L13">        registerLocalDate(builder);</span>
+<span class="fc" id="L14">        registerLocalDateTime(builder);</span>
+<span class="fc" id="L15">        registerLocalTime(builder);</span>
+<span class="fc" id="L16">        registerOffsetDateTime(builder);</span>
+<span class="fc" id="L17">        registerZonedDateTime(builder);</span>
+<span class="fc" id="L18">        registerInstant(builder);</span>
+<span class="fc" id="L19">        registerZoneId(builder);</span>
+<span class="fc" id="L20">        registerOffsetTime(builder);</span>
+<span class="fc" id="L21">        registerDuration(builder);</span>
+<span class="fc" id="L22">        return builder;</span>
+    }
+
+    public static GsonBuilder registerDate(GsonBuilder builder) {
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if (builder == null) {</span>
+<span class="nc" id="L27">            throw new NullPointerException(&quot;builder cannot be null&quot;);</span>
+        } else {
+<span class="fc" id="L29">            builder.registerTypeAdapter(Date.class, new DateAdapter());</span>
+<span class="fc" id="L30">            return builder;</span>
+        }
+    }
+
+    public static GsonBuilder registerLocalDate(GsonBuilder builder) {
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">        if (builder == null) {</span>
+<span class="nc" id="L36">            throw new NullPointerException(&quot;builder cannot be null&quot;);</span>
+        } else {
+<span class="fc" id="L38">            builder.registerTypeAdapter(Converters.LOCAL_DATE_TYPE, new LocalDateAdapter());</span>
+<span class="fc" id="L39">            return builder;</span>
+        }
+    }
+
+    public static GsonBuilder registerLocalDateTime(GsonBuilder builder) {
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">        if (builder == null) {</span>
+<span class="nc" id="L45">            throw new NullPointerException(&quot;builder cannot be null&quot;);</span>
+        } else {
+<span class="fc" id="L47">            builder.registerTypeAdapter(Converters.LOCAL_DATE_TIME_TYPE, new LocalDateTimeAdapter());</span>
+<span class="fc" id="L48">            return builder;</span>
+        }
+    }
+
+    public static GsonBuilder registerLocalTime(GsonBuilder builder) {
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">        if (builder == null) {</span>
+<span class="nc" id="L54">            throw new NullPointerException(&quot;builder cannot be null&quot;);</span>
+        } else {
+<span class="fc" id="L56">            builder.registerTypeAdapter(Converters.LOCAL_TIME_TYPE, new LocalTimeAdapter());</span>
+<span class="fc" id="L57">            return builder;</span>
+        }
+    }
+
+    public static GsonBuilder registerOffsetDateTime(GsonBuilder builder) {
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if (builder == null) {</span>
+<span class="nc" id="L63">            throw new NullPointerException(&quot;builder cannot be null&quot;);</span>
+        } else {
+<span class="fc" id="L65">            builder.registerTypeAdapter(Converters.OFFSET_DATE_TIME_TYPE, new OffsetDateTimeAdapter());</span>
+<span class="fc" id="L66">            return builder;</span>
+        }
+    }
+
+    public static GsonBuilder registerZonedDateTime(GsonBuilder builder) {
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        if (builder == null) {</span>
+<span class="nc" id="L72">            throw new NullPointerException(&quot;builder cannot be null&quot;);</span>
+        } else {
+<span class="fc" id="L74">            builder.registerTypeAdapter(Converters.ZONED_DATE_TIME_TYPE, new ZonedDateTimeAdapter());</span>
+<span class="fc" id="L75">            return builder;</span>
+        }
+    }
+
+    public static GsonBuilder registerInstant(GsonBuilder builder) {
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">        if (builder == null) {</span>
+<span class="nc" id="L81">            throw new NullPointerException(&quot;builder cannot be null&quot;);</span>
+        } else {
+<span class="fc" id="L83">            builder.registerTypeAdapter(Converters.INSTANT_TYPE, new InstantAdapter());</span>
+<span class="fc" id="L84">            return builder;</span>
+        }
+    }
+
+    public static GsonBuilder registerZoneId(GsonBuilder builder) {
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">        if (builder == null) {</span>
+<span class="nc" id="L90">            throw new NullPointerException(&quot;builder cannot be null&quot;);</span>
+        } else {
+<span class="fc" id="L92">            builder.registerTypeHierarchyAdapter(ZoneId.class, new ZoneIdAdapter());</span>
+<span class="fc" id="L93">            return builder;</span>
+        }
+    }
+
+    public static GsonBuilder registerOffsetTime(GsonBuilder builder) {
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">        if (builder == null) {</span>
+<span class="nc" id="L99">            throw new NullPointerException(&quot;builder cannot be null&quot;);</span>
+        } else {
+<span class="fc" id="L101">            builder.registerTypeAdapter(Converters.OFFSET_TIME_TYPE, new OffsetTimeAdapter());</span>
+<span class="fc" id="L102">            return builder;</span>
+        }
+    }
+
+    public static GsonBuilder registerDuration(GsonBuilder builder) {
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">        if (builder == null) {</span>
+<span class="nc" id="L108">            throw new NullPointerException(&quot;builder cannot be null&quot;);</span>
+        } else {
+<span class="fc" id="L110">            builder.registerTypeAdapter(Duration.class, new DurationAdapter());</span>
+<span class="fc" id="L111">            return builder;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
