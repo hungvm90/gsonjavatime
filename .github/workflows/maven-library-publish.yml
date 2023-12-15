@@ -26,17 +26,8 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
-
-      - name: Update package version
-        run: mvn versions:set -DnewVersion=${{ steps.get_version.outputs.VERSION }}
-
-      - name: Prepare Maven environnement with Java 17 for deployment to OSSRH
-        run: export MAVEN_OPTS="--add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.desktop/java.awt.font=ALL-UNNAMED"
-
       - name: Publish to Apache Maven Central
-        run: mvn deploy -PossrhDeploy
+        run: export MAVEN_OPTS="--add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.desktop/java.awt.font=ALL-UNNAMED" mvn  -U -B clean deploy -PossrhDeploy
         env:
           MAVEN_USERNAME: ${{ secrets.NEXUS_USERNAME }}
           MAVEN_CENTRAL_TOKEN: ${{ secrets.NEXUS_PASSWORD }}
