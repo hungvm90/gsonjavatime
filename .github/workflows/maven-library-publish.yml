@@ -26,7 +26,7 @@ jobs:
         run: export MAVEN_OPTS="--add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.desktop/java.awt.font=ALL-UNNAMED"
 
       - name: Publish to Apache Maven Central
-        run: mvn -U -B clean deploy -PossrhDeploy
+        run: mvn --batch-mode clean deploy -PossrhDeploy
         env:
           MAVEN_USERNAME: ${{ secrets.NEXUS_USERNAME }}
           MAVEN_CENTRAL_TOKEN: ${{ secrets.NEXUS_PASSWORD }}
@@ -40,6 +40,6 @@ jobs:
           server-id: github
 
       - name: Publish to GitHub Packages Apache Maven
-        run: mvn deploy -PgithubDeploy
+        run: mvn --batch-mode deploy -PgithubDeploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
